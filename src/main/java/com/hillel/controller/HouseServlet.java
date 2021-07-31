@@ -1,15 +1,21 @@
 package com.hillel.controller;
 
+import com.hillel.service.HouseService;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/houses")
+public class HouseServlet extends HttpServlet {
+    private final HouseService houseService = new HouseService();
 
-public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("test.jsp").forward(req, resp);
+        req.setAttribute("houses", houseService.findAllHouses());
+        req.getRequestDispatcher("views/houses.jsp").forward(req, resp);
     }
 }

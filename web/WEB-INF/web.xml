@@ -6,11 +6,11 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>MyServlet</servlet-name>
-        <servlet-class>com.hillel.controller.MyServlet</servlet-class>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>com.hillel.controller.CustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MyServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/customers</url-pattern>
     </servlet-mapping>
 </web-app>
