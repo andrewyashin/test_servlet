@@ -7,5 +7,6 @@
 Welcome <br>
 <a href="/app/customers">Customers</a> <br>
 <a href="/app/houses">Houses</a> <br>
+<a href="/app/roles">Roles</a> <br>
 </body>
 </html>
