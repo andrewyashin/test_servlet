@@ -10,8 +10,8 @@ import java.util.List;
 public class CustomerService {
     private final CustomerDao customerDao;
 
-    public CustomerService() {
-        customerDao = new CustomerDao();
+    public CustomerService(CustomerDao customerDao) {
+        this.customerDao = customerDao;
     }
 
     public List<CustomerDto> findAllCustomers() {
