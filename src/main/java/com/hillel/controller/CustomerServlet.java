@@ -1,5 +1,6 @@
 package com.hillel.controller;
 
+import com.hillel.dao.CustomerDao;
 import com.hillel.service.CustomerService;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,8 @@ import java.io.IOException;
 
 
 public class CustomerServlet extends HttpServlet {
-    private final CustomerService customerService = new CustomerService();
+    private final CustomerDao customerDao = new CustomerDao();
+    private final CustomerService customerService = new CustomerService(customerDao);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
