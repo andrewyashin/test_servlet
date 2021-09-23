@@ -1,5 +1,5 @@
 INSERT INTO customers (name, surname, age, email, password) VALUES ('Alex', 'One', 20, 'alex@mail.com', 'q12345');
-INSERT INTO customers (name, surname, age, email, password) VALUES (Bob, 'Two', 18, 'alex@mail.com', 'q12345');
+INSERT INTO customers (name, surname, age, email, password) VALUES ('Bob', 'Two', 18, 'bob@mail.com', 'q12345');
 INSERT INTO customers (name, surname, age, email, password) VALUES ('Mike', 'Three', 5, 'mike@mail.com', 'q1234');
 INSERT INTO customers (name, surname, age, email, password) VALUES ('John', 'Four', 2, 'john@mail.com', 'q12q');
 
