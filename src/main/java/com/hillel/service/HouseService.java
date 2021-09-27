@@ -24,7 +24,7 @@ public class HouseService {
         for (House house: houses) {
             HouseDto dto = new HouseDto();
             dto.setAddress(house.getAddress());
-            dto.setOwnerId(house.getOwnerId());
+//            dto.setOwnerId(house.getOwnerId());
             result.add(dto);
         }
 

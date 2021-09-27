@@ -2,14 +2,19 @@ package com.hillel.entity;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "name")
@@ -23,11 +28,25 @@ public class Customer {
     private int age;
     private String password;
 
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private Set<House> houses;
 
     public Customer(String name) {
         this.name = name;
     }
 
     public Customer() {
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

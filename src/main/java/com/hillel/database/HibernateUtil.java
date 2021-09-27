@@ -1,6 +1,7 @@
 package com.hillel.database;
 
 import com.hillel.entity.Customer;
+import com.hillel.entity.House;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -23,7 +24,7 @@ public class HibernateUtil {
                 settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/test");
                 settings.put(Environment.USER, "postgres");
                 settings.put(Environment.PASS, "root");
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+                settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL9Dialect");
 
                 settings.put(Environment.SHOW_SQL, "true");
 
@@ -35,6 +36,7 @@ public class HibernateUtil {
                 configuration.setProperties(settings);
 
                 configuration.addAnnotatedClass(Customer.class);
+                configuration.addAnnotatedClass(House.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
