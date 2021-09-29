@@ -5,6 +5,7 @@
     <title>Houses</title>
 </head>
 <body>
+
 <a href="/app">Main page</a> <br>
 <c:forEach items="${houses}" var="item">
     ${item.ownerId} - ${item.address} <br>

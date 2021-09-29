@@ -1,48 +1,48 @@
 package com.hillel.dao;
 
 import com.hillel.database.HibernatePropertiesUtil;
-import com.hillel.entity.Role;
+import com.hillel.entity.Passport;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class RoleDao {
-    public List<Role> findAllRoles() {
+public class PassportDao {
+    public List<Passport> findAllPassports() {
         try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Role").list();
+            return session.createQuery("FROM Passport").list();
         }
     }
 
-    public Role findById(Integer id) {
+    public Passport findById(Integer id) {
         try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            return session.byId(Role.class).getReference(id);
+            return session.byId(Passport.class).getReference(id);
         }
     }
 
-    public void save(Role role) {
+    public void save(Passport passport) {
         try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            session.save(role);
+            session.save(passport);
             transaction.commit();
         }
     }
 
-    public void delete(Role role) {
+    public void delete(Passport passport) {
         try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            session.delete(role);
+            session.delete(passport);
             transaction.commit();
         }
     }
 
-    public void update(Role role) {
+    public void update(Passport passport) {
         try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            session.update(role);
+            session.update(passport);
             transaction.commit();
         }
     }

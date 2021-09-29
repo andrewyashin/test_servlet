@@ -6,6 +6,7 @@ import com.hillel.entity.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CustomerService {
     private final CustomerDao customerDao;
@@ -18,7 +19,7 @@ public class CustomerService {
         List<Customer> customers = customerDao.findAllCustomers();
         List<CustomerDto> result = new ArrayList<>();
 
-        for (Customer customer: customers) {
+        for (Customer customer : customers) {
             CustomerDto dto = new CustomerDto();
             dto.setEmail(customer.getEmail());
             dto.setId(customer.getId());
@@ -28,5 +29,26 @@ public class CustomerService {
         }
 
         return result;
+    }
+
+    public void save(CustomerDto customerDto) {
+        Customer customer = new Customer();
+        customer.setEmail(customerDto.getEmail());
+        customer.setName(customerDto.getName());
+        customer.setSurname(customerDto.getSurname());
+        customer.setAge(18);
+        customer.setPassword(UUID.randomUUID().toString().substring(0, 20));
+
+        customerDao.save(customer);
+    }
+
+    public void delete(int id) {
+        Customer customer = customerDao.findById(id);
+        if (customer != null) {
+            customerDao.delete(customer);
+        } else {
+            System.out.println("Customer with id has been already deleted - " + id);
+//            logger.warn("Customer with id {} has been already deleted", id);
+        }
     }
 }

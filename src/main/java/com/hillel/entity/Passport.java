@@ -4,29 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table
+public class Passport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    private String data;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<Customer> customers;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "Passport{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", data='" + data + '\'' +
                 '}';
     }
 }

@@ -18,7 +18,7 @@ public class RoleService {
         List<Role> roles = roleDao.findAllRoles();
         List<RoleDto> result = new ArrayList<>();
 
-        for (Role role: roles) {
+        for (Role role : roles) {
             RoleDto dto = new RoleDto();
             dto.setId(role.getId());
             dto.setName(role.getName());

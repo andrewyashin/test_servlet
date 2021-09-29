@@ -2,16 +2,14 @@ package com.hillel.entity;
 
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "customers")
+@NamedQuery(name = "findCustomersBySurname", query = "FROM Customer where surname = :surname")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,28 +23,28 @@ public class Customer {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+
     private int age;
+
     private String password;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<House> houses;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "customer_role",
+            joinColumns = {@JoinColumn(name = "customer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Passport passport;
 
     public Customer(String name) {
         this.name = name;
     }
 
     public Customer() {
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
