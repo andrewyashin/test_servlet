@@ -1,36 +1,30 @@
 package com.hillel.dao;
 
+import com.hillel.dao.mapper.CustomerMapper;
 import com.hillel.database.HibernatePropertiesUtil;
 import com.hillel.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class CustomerDao {
+    private static final String FIND_ALL_CUSTOMERS = "SELECT * FROM customers";
 
-    public static final String FROM_CUSTOMER_WHERE_SURNAME_SURNAME = "FROM Customer where surname = :surname";
-    public static final String SURNAME = "surname";
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private RowMapper<Customer> customerRowMapper;
 
     public List<Customer> findAllCustomers() {
-        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Customer").list();
-        }
+        return jdbcTemplate.query(FIND_ALL_CUSTOMERS, customerRowMapper);
     }
-
-//    public List<Customer> findCustomersWhereSurname(String surname) {
-//        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-//            return session.createQuery("FROM Customer where surname = :surname")
-//                    .setParameter(SURNAME, surname).list();
-//        }
-//    }
-
-//    public List<Customer> findCustomersWhereSurname(String surname) {
-//        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-//            return session.createNamedQuery("findCustomersBySurname")
-//                    .setParameter(SURNAME, surname).list();
-//        }
-//    }
 
 //    public List<Customer> findCustomersWhereSurname(String surname) {
 //        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {

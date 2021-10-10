@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class HouseDto {
-    private int ownerId;
+    private Long ownerId;
     private String address;
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class CustomerServlet extends HttpServlet {
     private final CustomerDao customerDao = new CustomerDao();
-    private final CustomerService customerService = new CustomerService(customerDao);
+    private final CustomerService customerService = new CustomerService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

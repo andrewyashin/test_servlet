@@ -3,17 +3,16 @@ package com.hillel.service;
 import com.hillel.dao.CustomerDao;
 import com.hillel.dto.CustomerDto;
 import com.hillel.entity.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class CustomerService {
-    private final CustomerDao customerDao;
 
-    public CustomerService(CustomerDao customerDao) {
-        this.customerDao = customerDao;
-    }
+    private CustomerDao customerDao;
 
     public List<CustomerDto> findAllCustomers() {
         List<Customer> customers = customerDao.findAllCustomers();
@@ -50,5 +49,9 @@ public class CustomerService {
             System.out.println("Customer with id has been already deleted - " + id);
 //            logger.warn("Customer with id {} has been already deleted", id);
         }
+    }
+
+    public void setCustomerDao(CustomerDao customerDao) {
+        this.customerDao = customerDao;
     }
 }

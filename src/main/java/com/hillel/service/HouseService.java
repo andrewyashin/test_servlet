@@ -3,16 +3,17 @@ package com.hillel.service;
 import com.hillel.dao.HouseDao;
 import com.hillel.dto.HouseDto;
 import com.hillel.entity.House;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class HouseService {
-    private final HouseDao houseDao;
 
-    public HouseService() {
-        houseDao = new HouseDao();
-    }
+    @Autowired
+    private HouseDao houseDao;
 
     public List<HouseDto> findAllHouses() {
         List<House> houses = houseDao.findAllHouses();

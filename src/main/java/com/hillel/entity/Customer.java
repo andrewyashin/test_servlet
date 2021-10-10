@@ -13,7 +13,7 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -24,14 +24,14 @@ public class Customer {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    private int age;
+    private Integer age;
 
     private String password;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<House> houses;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "customer_role",
             joinColumns = {@JoinColumn(name = "customer_id")},

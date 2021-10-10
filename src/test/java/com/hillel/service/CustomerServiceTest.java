@@ -25,13 +25,13 @@ public class CustomerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        customerService = new CustomerService(customerDao);
+        customerService = new CustomerService();
     }
 
     @Test
     public void findAllCustomers() {
         Customer customer = new Customer();
-        customer.setId(1);
+        customer.setId(1L);
         customer.setName("Name");
 
         when(customerDao.findAllCustomers()).thenReturn(Collections.singletonList(customer));
