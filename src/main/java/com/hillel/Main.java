@@ -18,6 +18,6 @@ public class Main {
         System.out.println(customerService.findAllCustomers());
         System.out.println(houseService.findAllHouses());
         System.out.println(customerRepository.findAll());
-        System.out.println(customerRepository.findById(74L));
+        customerRepository.findById(74L).ifPresent(System.out::println);
     }
 }

@@ -3,19 +3,23 @@ package com.hillel.service;
 import com.hillel.dao.CustomerDao;
 import com.hillel.dto.CustomerDto;
 import com.hillel.entity.Customer;
+import com.hillel.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class CustomerService {
 
-    private CustomerDao customerDao;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public List<CustomerDto> findAllCustomers() {
-        List<Customer> customers = customerDao.findAllCustomers();
+        List<Customer> customers = customerRepository.findAll();
         List<CustomerDto> result = new ArrayList<>();
 
         for (Customer customer : customers) {
@@ -38,20 +42,16 @@ public class CustomerService {
         customer.setAge(18);
         customer.setPassword(UUID.randomUUID().toString().substring(0, 20));
 
-        customerDao.save(customer);
+        customerRepository.save(customer);
     }
 
     public void delete(int id) {
-        Customer customer = customerDao.findById(id);
+        Customer customer = customerRepository.findById(Integer.toUnsignedLong(id)).get();
         if (customer != null) {
-            customerDao.delete(customer);
+            customerRepository.delete(customer);
         } else {
             System.out.println("Customer with id has been already deleted - " + id);
 //            logger.warn("Customer with id {} has been already deleted", id);
         }
-    }
-
-    public void setCustomerDao(CustomerDao customerDao) {
-        this.customerDao = customerDao;
     }
 }

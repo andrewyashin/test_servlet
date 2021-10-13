@@ -1,10 +1,6 @@
 package com.hillel.dao;
 
-import com.hillel.dao.mapper.CustomerMapper;
-import com.hillel.database.HibernatePropertiesUtil;
 import com.hillel.entity.Customer;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -36,36 +32,36 @@ public class CustomerDao {
 //        }
 //    }
 
-    public Customer findById(Integer id) {
-        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            return session.byId(Customer.class).getReference(id);
-        }
-    }
+//    public Customer findById(Integer id) {
+//        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
+//            return session.byId(Customer.class).getReference(id);
+//        }
+//    }
+//
+//    public void save(Customer customer) {
+//        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
+//            Transaction transaction = session.beginTransaction();
+//
+//            session.save(customer);
+//            transaction.commit();
+//        }
+//    }
 
-    public void save(Customer customer) {
-        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+//    public void delete(Customer customer) {
+//        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
+//            Transaction transaction = session.beginTransaction();
+//
+//            session.delete(customer);
+//            transaction.commit();
+//        }
+//    }
 
-            session.save(customer);
-            transaction.commit();
-        }
-    }
-
-    public void delete(Customer customer) {
-        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-
-            session.delete(customer);
-            transaction.commit();
-        }
-    }
-
-    public void update(Customer customer) {
-        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-
-            session.update(customer);
-            transaction.commit();
-        }
-    }
+//    public void update(Customer customer) {
+//        try (Session session = HibernatePropertiesUtil.getSessionFactory().openSession()) {
+//            Transaction transaction = session.beginTransaction();
+//
+//            session.update(customer);
+//            transaction.commit();
+//        }
+//    }
 }
