@@ -3,14 +3,15 @@ package com.hillel.controller;
 import com.hillel.dto.CustomerDto;
 import com.hillel.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/app/customers")
 public class CustomerController {
 
@@ -18,34 +19,27 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
-//    @RequestMapping(method = RequestMethod.GET)
-    public String customers(ModelMap modelMap) {
-        modelMap.addAttribute("customers", customerService.findAllCustomers());
-        return "customers";
+    public List<CustomerDto> customers(ModelMap modelMap) {
+        return customerService.findAllCustomers();
     }
 
 
-    @GetMapping("/delete")
-    public String delete(ModelMap modelMap) {
-        String idForDelete = (String) modelMap.getAttribute("id");
-
-        customerService.delete(Integer.parseInt(idForDelete));
-
-        modelMap.addAttribute("customers", customerService.findAllCustomers());
-
-        return "customers";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        customerService.delete(id);
+        return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteByParam(@RequestParam Integer id) {
+        customerService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 
     @PostMapping
-//    @RequestMapping(method = RequestMethod.POST)
-    public String save(ModelMap modelMap) {
-        CustomerDto customerDto = new CustomerDto();
-        customerDto.setEmail((String) modelMap.getAttribute("email"));
-        customerDto.setName((String) modelMap.getAttribute("name"));
-        customerDto.setSurname((String) modelMap.getAttribute("surname"));
+    public List<CustomerDto> save(@RequestBody CustomerDto customerDto) {
         customerService.save(customerDto);
-
-        modelMap.addAttribute("customers", customerService.findAllCustomers());
-        return "customers";
+        return customerService.findAllCustomers();
     }
 }

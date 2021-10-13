@@ -15,15 +15,15 @@ public class RoleService {
     }
 
     public List<RoleDto> findAllRoles() {
-        List<Role> roles = roleDao.findAllRoles();
+//        List<Role> roles = roleDao.findAllRoles();
         List<RoleDto> result = new ArrayList<>();
 
-        for (Role role : roles) {
-            RoleDto dto = new RoleDto();
-            dto.setId(role.getId());
-            dto.setName(role.getName());
-            result.add(dto);
-        }
+//        for (Role role : roles) {
+//            RoleDto dto = new RoleDto();
+//            dto.setId(role.getId());
+//            dto.setName(role.getName());
+//            result.add(dto);
+//        }
 
         return result;
     }

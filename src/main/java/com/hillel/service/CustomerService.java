@@ -1,11 +1,9 @@
 package com.hillel.service;
 
-import com.hillel.dao.CustomerDao;
 import com.hillel.dto.CustomerDto;
 import com.hillel.entity.Customer;
 import com.hillel.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
